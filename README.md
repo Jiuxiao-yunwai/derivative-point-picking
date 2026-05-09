@@ -7,10 +7,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Codex Skill](https://img.shields.io/badge/Codex-Skill-blueviolet)](SKILL.md)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://docs.claude.com/en/docs/claude-code/skills)
-[![OpenClaw](https://img.shields.io/badge/OpenClaw-Compatible-111827)](https://docs.openclaw.ai/tools/skills)
-[![AgentSkills](https://img.shields.io/badge/AgentSkills-Compatible-green)](https://www.agentskills.in/docs/getting-started)
-[![Math](https://img.shields.io/badge/Math-Derivative-blue.svg)](SKILL.md)
-[![Gaokao](https://img.shields.io/badge/Gaokao-Proof-green.svg)](SKILL.md)
 [![Language](https://img.shields.io/badge/Language-中文-red.svg)](README.md)
 
 <br>
@@ -43,7 +39,7 @@ AI 会说“显然存在”，<br>
 | 导数压轴题 | 函数构造、放缩 | 取点来源说明 | 点不能凭空出现 |
 | 指数对数混合 | 切线放缩、同构换元 | 简化后反推取点 | 解释为什么这样取 |
 | 恒成立问题 | 最值、切线、二次拟合 | 转化为不等式证明 | 保留阅卷链条 |
-| 数列极限夹逼 | 极限探路 | 显式取足够大的 \(n\) | 避免只靠极限语言 |
+| 数列极限夹逼 | 极限探路 | 显式取足够大的 $n$ | 避免只靠极限语言 |
 
 ## 为什么需要这个 Skill
 
@@ -71,19 +67,31 @@ https://github.com/Jiuxiao-yunwai/derivative-point-picking
 
 ### Codex
 
+Windows PowerShell：
+
 ```powershell
-git clone https://github.com/Jiuxiao-yunwai/derivative-point-picking.git C:\Users\你的用户名\.codex\skills\derivative-point-picking
+git clone https://github.com/Jiuxiao-yunwai/derivative-point-picking.git $env:USERPROFILE\.codex\skills\derivative-point-picking
 ```
 
-如果你已经把仓库下载到本地，也可以直接把整个文件夹复制到：
+macOS / Linux：
 
-```text
-C:\Users\你的用户名\.codex\skills\derivative-point-picking
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/Jiuxiao-yunwai/derivative-point-picking.git ~/.codex/skills/derivative-point-picking
 ```
 
 ### Claude Code
 
-个人 Skill，所有项目可用：
+个人 Skill，所有项目可用。
+
+Windows PowerShell：
+
+```powershell
+New-Item -ItemType Directory -Force -Path $env:USERPROFILE\.claude\skills | Out-Null
+git clone https://github.com/Jiuxiao-yunwai/derivative-point-picking.git $env:USERPROFILE\.claude\skills\derivative-point-picking
+```
+
+macOS / Linux：
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -92,65 +100,28 @@ git clone https://github.com/Jiuxiao-yunwai/derivative-point-picking.git ~/.clau
 
 项目 Skill，只在当前项目可用：
 
+Windows PowerShell：
+
+```powershell
+New-Item -ItemType Directory -Force -Path .claude\skills | Out-Null
+git clone https://github.com/Jiuxiao-yunwai/derivative-point-picking.git .claude\skills\derivative-point-picking
+```
+
+macOS / Linux：
+
 ```bash
 mkdir -p .claude/skills
 git clone https://github.com/Jiuxiao-yunwai/derivative-point-picking.git .claude/skills/derivative-point-picking
 ```
 
-Windows PowerShell 也可以使用：
-
-```powershell
-git clone https://github.com/Jiuxiao-yunwai/derivative-point-picking.git $env:USERPROFILE\.claude\skills\derivative-point-picking
-```
-
 ### Claude.ai
 
-Claude.ai 的自定义 Skill 通常使用 ZIP 上传：
+Claude.ai 的自定义 Skill 通常使用 ZIP 上传，不区分系统：
 
 1. 下载或克隆本仓库；
 2. 确保 ZIP 内包含 `derivative-point-picking/` 文件夹，而不是把 `SKILL.md` 直接放在 ZIP 根目录；
 3. 在 Claude.ai 中进入 `Customize > Skills`；
 4. 选择创建/上传 Skill，并上传 ZIP 文件。
-
-### OpenClaw
-
-OpenClaw 支持 AgentSkills 兼容的 Skill 文件夹。常用安装位置如下：
-
-工作区 Skill：
-
-```bash
-mkdir -p skills
-git clone https://github.com/Jiuxiao-yunwai/derivative-point-picking.git skills/derivative-point-picking
-```
-
-项目 Agent Skill：
-
-```bash
-mkdir -p .agents/skills
-git clone https://github.com/Jiuxiao-yunwai/derivative-point-picking.git .agents/skills/derivative-point-picking
-```
-
-个人 Agent Skill：
-
-```bash
-mkdir -p ~/.agents/skills
-git clone https://github.com/Jiuxiao-yunwai/derivative-point-picking.git ~/.agents/skills/derivative-point-picking
-```
-
-如果之后发布到 ClawHub，也可以使用：
-
-```bash
-openclaw skills install derivative-point-picking
-```
-
-### AgentSkills CLI
-
-如果你使用 AgentSkills CLI：
-
-```bash
-npm install -g agent-skills-cli
-skills add Jiuxiao-yunwai/derivative-point-picking
-```
 
 ## 使用方式
 
@@ -170,150 +141,150 @@ skills add Jiuxiao-yunwai/derivative-point-picking
 
 题目：
 
-已知 \(a,b\in\mathbb R\)，函数
+已知 $a,b\in\mathbb R$，函数
 
-\[
+$$
 f(x)=e^x-a\sin x,\qquad g(x)=b\sqrt{x}.
-\]
+$$
 
-若曲线 \(y=f(x)\) 和 \(y=g(x)\) 有公共点，当 \(a=0\) 时，求 \(b\) 的取值范围。
+若曲线 $y=f(x)$ 和 $y=g(x)$ 有公共点，当 $a=0$ 时，求 $b$ 的取值范围。
 
 ### 普通分析
 
-当 \(a=0\) 时，公共点条件为
+当 $a=0$ 时，公共点条件为
 
-\[
+$$
 e^x=b\sqrt{x}.
-\]
+$$
 
-因为 \(x=0\) 时左边为 \(1\)，右边为 \(0\)，所以公共点必须满足 \(x>0\)。
+因为 $x=0$ 时左边为 $1$，右边为 $0$，所以公共点必须满足 $x>0$。
 
 于是
 
-\[
+$$
 b=\frac{e^x}{\sqrt{x}}.
-\]
+$$
 
 设
 
-\[
+$$
 \varphi(x)=\frac{e^x}{\sqrt{x}},\qquad x>0.
-\]
+$$
 
 求导可得
 
-\[
+$$
 \varphi'(x)=\frac{e^x}{x\sqrt{x}}\left(x-\frac12\right).
-\]
+$$
 
-所以 \(\varphi(x)\) 在 \((0,\frac12)\) 上单调递减，在 \((\frac12,+\infty)\) 上单调递增，最小值为
+所以 $\varphi(x)$ 在 $(0,\frac12)$ 上单调递减，在 $(\frac12,+\infty)$ 上单调递增，最小值为
 
-\[
+$$
 \varphi\left(\frac12\right)=\sqrt{2e}.
-\]
+$$
 
 因此必要性为
 
-\[
+$$
 b\ge \sqrt{2e}.
-\]
+$$
 
-但如果只写“\(\varphi(x)\to+\infty\)，所以值域为 \([\sqrt{2e},+\infty)\)”作为充分性，在高考书写中可能不够稳。
+但如果只写“$\varphi(x)\to+\infty$，所以值域为 $[\sqrt{2e},+\infty)$”作为充分性，在高考书写中可能不够稳。
 
 ### 取点式证明
 
-下面证明：当 \(b\ge\sqrt{2e}\) 时，确实存在 \(x>0\)，使
+下面证明：当 $b\ge\sqrt{2e}$ 时，确实存在 $x>0$，使
 
-\[
+$$
 \frac{e^x}{\sqrt{x}}=b.
-\]
+$$
 
 令
 
-\[
+$$
 h(x)=\frac{e^x}{\sqrt{x}}-b,\qquad x>0.
-\]
+$$
 
-由前面的单调性可知，\(h(x)\) 在 \(x=\frac12\) 处取最小值，且
+由前面的单调性可知，$h(x)$ 在 $x=\frac12$ 处取最小值，且
 
-\[
+$$
 h\left(\frac12\right)=\sqrt{2e}-b\le 0.
-\]
+$$
 
-接下来需要找一个点，使 \(h(x)>0\)。
+接下来需要找一个点，使 $h(x)>0$。
 
 取点不是凭空来的。我们希望
 
-\[
+$$
 \frac{e^x}{\sqrt{x}}>b.
-\]
+$$
 
-如果先让 \(\sqrt{x}=\frac1b\)，即
+如果先让 $\sqrt{x}=\frac1b$，即
 
-\[
+$$
 x=\frac1{b^2},
-\]
+$$
 
 那么
 
-\[
+$$
 \frac{e^x}{\sqrt{x}}
 =be^{1/b^2}>b.
-\]
+$$
 
 这就是取
 
-\[
+$$
 x=\frac1{b^2}
-\]
+$$
 
 的来源。
 
-又因为 \(b\ge\sqrt{2e}\)，所以
+又因为 $b\ge\sqrt{2e}$，所以
 
-\[
+$$
 \frac1{b^2}\le\frac1{2e}<\frac12.
-\]
+$$
 
 于是
 
-\[
+$$
 h\left(\frac1{b^2}\right)
 =be^{1/b^2}-b
 =b\left(e^{1/b^2}-1\right)>0,
-\]
+$$
 
 而
 
-\[
+$$
 h\left(\frac12\right)\le0.
-\]
+$$
 
-由连续函数零点存在定理，\(h(x)\) 在区间
+由连续函数零点存在定理，$h(x)$ 在区间
 
-\[
+$$
 \left(\frac1{b^2},\frac12\right]
-\]
+$$
 
-内存在零点，即存在 \(x_0>0\)，使
+内存在零点，即存在 $x_0>0$，使
 
-\[
+$$
 h(x_0)=0.
-\]
+$$
 
 因此
 
-\[
+$$
 e^{x_0}=b\sqrt{x_0},
-\]
+$$
 
 两曲线有公共点。
 
 综上，
 
-\[
+$$
 \boxed{b\in[\sqrt{2e},+\infty)}.
-\]
+$$
 
 ## Skill 的核心规则
 
@@ -323,7 +294,7 @@ e^{x_0}=b\sqrt{x_0},
 - 最终证明存在性时，优先使用具体取点；
 - 取点必须解释来源，不能像“魔法点”一样突然出现；
 - 参数范围题必须分必要性和充分性；
-- 数列中的极限夹逼，尽量改写为显式取足够大的 \(n\)；
+- 数列中的极限夹逼，尽量改写为显式取足够大的 $n$；
 - 对学生讲解时，说明放缩、切线、泰勒估计、同构换元等取点依据。
 
 ## 适用题型
